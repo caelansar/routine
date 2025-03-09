@@ -182,6 +182,13 @@ fn guard() {
     }
 }
 
+pub fn go(f: fn()) {
+    let rt_ptr = RUNTIME.get().expect("Runtime not initialized");
+    unsafe {
+        (*rt_ptr.0).go(f);
+    }
+}
+
 #[naked]
 #[unsafe(no_mangle)]
 unsafe extern "C" fn skip() {
@@ -221,7 +228,7 @@ fn main() {
     let mut runtime = Runtime::new();
     runtime.init();
 
-    runtime.go(|| {
+    go(|| {
         println!("Routine 1 STARTING");
         let id = 1;
         for i in 0..10 {
@@ -231,7 +238,7 @@ fn main() {
         println!("Routine: {} FINISHED", id);
     });
 
-    runtime.go(|| {
+    go(|| {
         println!("Routine 2 STARTING");
         let id = 2;
         for i in 0..15 {
