@@ -63,7 +63,7 @@ fn main() {
     runtime.init();
 
     // Create first coroutine
-    runtime.go(|| {
+    go(|| {
         println!("Routine 1 STARTING");
         let id = 1;
         for i in 0..10 {
@@ -74,7 +74,7 @@ fn main() {
     });
 
     // Create second coroutine
-    runtime.go(|| {
+    go(|| {
         println!("Routine 2 STARTING");
         let id = 2;
         for i in 0..15 {

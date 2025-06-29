@@ -1,6 +1,3 @@
-#![allow(unsafe_op_in_unsafe_fn)]
-#![feature(naked_functions)]
-
 use std::{
     arch::{asm, naked_asm},
     sync::OnceLock,
@@ -189,13 +186,13 @@ pub fn go(f: fn()) {
     }
 }
 
-#[naked]
+#[unsafe(naked)]
 #[unsafe(no_mangle)]
 unsafe extern "C" fn skip() {
     naked_asm!("ret")
 }
 
-#[naked]
+#[unsafe(naked)]
 #[unsafe(no_mangle)]
 unsafe extern "C" fn swap_context() {
     naked_asm!(
