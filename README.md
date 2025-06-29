@@ -90,7 +90,6 @@ fn main() {
 
 ## Requirements
 
-- Rust nightly (required for `naked_functions` feature)
 - x86_64 architecture *only*
 
 ## Safety Notes
